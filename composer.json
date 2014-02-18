@@ -1,0 +1,32 @@
+{
+    "name": "panadas/module-session",
+    "description": "Session management.",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Adam Pancutt",
+            "email": "adam@panadas.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "panadas/module-data-structure": "~1.0",
+        "panadas/module-event": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3.7.0",
+        "panadas/phpcs-standard": "~1.0"
+    },
+    "autoload": {
+        "psr-4" : {
+            "Panadas\\SessionModule\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

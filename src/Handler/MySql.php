@@ -1,5 +1,5 @@
 <?php
-namespace Panadas\SessionModule\Handler;
+namespace Panadas\Session\Handler;
 
 class MySql extends AbstractPdo
 {

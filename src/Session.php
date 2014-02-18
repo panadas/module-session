@@ -1,9 +1,9 @@
 <?php
-namespace Panadas\SessionManager;
+namespace Panadas\SessionModule;
 
-use Panadas\EventManager\Event;
-use Panadas\EventManager\Publisher;
-use Panadas\SessionManager\DataStructure\SessionParams;
+use Panadas\EventModule\Event;
+use Panadas\EventModule\Publisher;
+use Panadas\SessionModule\DataStructure\SessionParams;
 
 class Session extends Publisher
 {

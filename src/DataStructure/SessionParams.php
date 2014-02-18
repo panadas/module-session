@@ -1,7 +1,7 @@
 <?php
-namespace Panadas\SessionManager\DataStructure;
+namespace Panadas\SessionModule\DataStructure;
 
-use Panadas\DataStructure\Hash;
+use Panadas\DataStructureModule\Hash;
 
 class SessionParams extends Hash
 {

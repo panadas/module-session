@@ -1,5 +1,5 @@
 <?php
-namespace Panadas\SessionManager\Handler;
+namespace Panadas\SessionModule\Handler;
 
 abstract class AbstractPdo implements \SessionHandlerInterface
 {

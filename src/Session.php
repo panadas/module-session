@@ -307,27 +307,28 @@ class Session extends Publisher
             throw new \RuntimeException("Session is already open");
         }
 
-        $this->publish("open", function (Event $event) {
-
-            $eventParams = $event->getParams();
-
-            if ($eventParams->has("id")) {
-                $this->setId($eventParams->get("id"));
-            }
-
-            session_start();
-
-            if (!array_key_exists(static::KEY_NAMESPACE, $_SESSION)) {
-                $_SESSION[static::KEY_NAMESPACE] = [];
-            }
-
-            $this->getParams()->bind($_SESSION[static::KEY_NAMESPACE]);
-
-            $this->updateFlash();
-
-        });
+        $this->publish("open", [$this, "onOpenEvent"]);
 
         return $this;
+    }
+
+    protected function onOpenEvent(Event $event)
+    {
+        $eventParams = $event->getParams();
+
+        if ($eventParams->has("id")) {
+            $this->setId($eventParams->get("id"));
+        }
+
+        session_start();
+
+        if (!array_key_exists(static::KEY_NAMESPACE, $_SESSION)) {
+            $_SESSION[static::KEY_NAMESPACE] = [];
+        }
+
+        $this->getParams()->bind($_SESSION[static::KEY_NAMESPACE]);
+
+        $this->updateFlash();
     }
 
     public function destroy()
@@ -336,15 +337,16 @@ class Session extends Publisher
             throw new \RuntimeException("Session is not open");
         }
 
-        $this->publish("destroy", function (Event $event) {
-
-            session_destroy();
-
-            $this->getParams()->clear();
-
-        });
+        $this->publish("destroy", [$this, "onDestoryEvent"]);
 
         return $this;
+    }
+
+    protected function onDestroyEvent(Event $event)
+    {
+        session_destroy();
+
+        $this->getParams()->clear();
     }
 
     public function restart()
@@ -363,9 +365,14 @@ class Session extends Publisher
             throw new \RuntimeException("Session is not open");
         }
 
-        $this->publish("close", "session_write_close");
+        $this->publish("close", [$this, "onCloseEvent"]);
 
         return $this;
+    }
+
+    protected function onCloseEvent(Event $even)
+    {
+        session_write_close();
     }
 
     protected function updateFlash()
